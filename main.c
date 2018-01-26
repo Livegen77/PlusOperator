@@ -13,28 +13,60 @@ int plusoperator(const unsigned int first, const unsigned int second){
 		/* Bit in both value match */
 		if((first & value_bit) && (second &value_bit)){
 			if(retenu){
+				result |= value_bit;
+				retenu = 0;
 			} else {
 				retenu = 1;
 			}
 		}	
 		else if(first & value_bit){
-			result |= value_bit;
-		}	
+			if(retenu){
+				retenu = 0;
+			}
+			else {
+				result |= value_bit;
+			}
+		}
 		else if(second & value_bit){
-			result |= value_bit;
+			if(retenu){
+				retenu = 0;
+			}
+			else {
+				result |= value_bit;
+			}
+		}
+		else{
+			if(retenu){
+				result |= value_bit;
+				retenu = 0;
+			}
 		}	
 	}
 
 	return result;
 }
 
-void main(int argc){
+void main(int argc, char **argv){
+	unsigned int 	first = 0;
+	unsigned int 	second = 0;
+	unsigned int 	expectedresult = 0;
+	unsigned int 	calculatedresult = 0;
+	unsigned char 	operator = 0;
 
-	unsigned int first = 4;
-	unsigned int second = 2;
+	while((operator != '+') && (operator != '-')){
+		printf("+ or minus - ? %c \n", operator);
+		scanf("%c", &operator);
+	}
 
-	unsigned int expectedresult = first + second;
-	unsigned int calculatedresult = plusoperator(first, second);
+	puts("number 1 ?");
+	scanf("%i", &first)
+;
+	puts("number 2 ?");
+	scanf("%i", &second);
+
+
+	expectedresult = first + second;
+	calculatedresult = plusoperator(first, second);
 
 	printf("expected result = %i \n", expectedresult);
 	printf("calculated result = %u \n", calculatedresult); 
