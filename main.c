@@ -22,19 +22,13 @@ unsigned int plusoperator(const unsigned int first, const unsigned int second){
 		}
 		/* Bit only active on the first number */	
 		else if(first & value_bit){
-			if(carry){
-				carry = 0;
-			}
-			else {
+			if(carry == 0){
 				result |= value_bit;
 			}
 		}
 		/* Bit only active on the second number */
 		else if(second & value_bit){
-			if(carry){
-				carry = 0;
-			}
-			else {
+			if(carry == 0){
 				result |= value_bit;
 			}
 		}
@@ -67,5 +61,14 @@ void main(int argc, char **argv){
 	calculatedresult = plusoperator(first, second);
 
 	printf("expected result = %u \n", expectedresult);
-	printf("calculated result = %u \n", calculatedresult); 
+	printf("calculated result = %u \n", calculatedresult);
+
+
+	if(expectedresult != calculatedresult){
+		printf("expected result doesn't not match the calculated result \n");
+			
+		printf("expected result : %08x \n", expectedresult);
+		printf("calculated result : %08x \n", calculatedresult);
+	}
+ 
 }
